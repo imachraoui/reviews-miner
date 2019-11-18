@@ -22,8 +22,6 @@ while(True):
 
         page = requests.get(new_link, headers = headers).text
 
-        print(1)
-
         soup = BeautifulSoup(page, "lxml")
 
         link_next_page = soup.find("div",class_="listContainer hide-more-mobile").find("div", class_="unified ui_pagination").find("a", class_="nav next taLnk ui_button primary")["href"]
