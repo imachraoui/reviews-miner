@@ -3,19 +3,19 @@ import requests
 import time as t
 import re
 import pandas as pd
- 
+
 reviews_df=pd.DataFrame()
- 
-searchlink= 'https://www.tripadvisor.fr//Restaurant_Review-g187147-d10514254-Reviews-or1030-Les_Apotres_de_Pigalle-Paris_Ile_de_France.html'
- 
+
+searchlink= 'https://www.tripadvisor.fr/Restaurant_Review-g187147-d6575305-Reviews-Il_Etait_Un_Square-Paris_Ile_de_France.html'
+
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
  
 headers = {'User-Agent': user_agent}
  
 links = [searchlink]
- 
+
 new_link = searchlink
- 
+
 while(True):
 
     try: 
@@ -45,7 +45,7 @@ while(True):
  
             stay_date = review_container.find("div",class_="prw_rup prw_reviews_stay_date_hsx").contents[1].lstrip()
  
-            # print(stay_date)
+            print(stay_date)
  
             review_dict = {
                 "review_rating" : rating,
@@ -56,11 +56,11 @@ while(True):
             reviews_df = reviews_df.append(review_dict, ignore_index=True)
  
         reviews_df.to_csv("tripadvisor_reviews.csv", mode='a', header=False)
- 
+
         t.sleep(2)
- 
+
     except:
- 
+
        break
  
 print(links)
